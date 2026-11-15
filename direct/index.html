@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Автономный мини-трекер учебных задач на неделю: часы, статусы и прогресс."
+    />
+    <title>Мини-трекер учебных задач</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app__header">
+        <p class="eyebrow">Учебный план на неделю</p>
+        <h1>Мини-трекер задач</h1>
+        <p class="subtitle">
+          Отмечайте готовое и следите за прогрессом по часам. Данные остаются в
+          браузере.
+        </p>
+      </header>
+
+      <section class="summary" aria-labelledby="summary-title">
+        <h2 class="visually-hidden" id="summary-title">Сводка</h2>
+
+        <div class="stats" aria-live="polite">
+          <div class="stat">
+            <span class="stat__label">Всего часов</span>
+            <span class="stat__value" id="total-hours">8 ч</span>
+          </div>
+          <div class="stat">
+            <span class="stat__label">Выполнено</span>
+            <span class="stat__value" id="done-hours">2 ч</span>
+          </div>
+        </div>
+
+        <div class="progress">
+          <div class="progress__head">
+            <span id="progress-label">Прогресс по часам</span>
+            <span class="progress__percent" id="progress-percent">25%</span>
+          </div>
+          <div
+            class="progress__track"
+            id="progress-bar"
+            role="progressbar"
+            aria-labelledby="progress-label"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="25"
+          >
+            <div class="progress__fill" id="progress-fill" style="width: 25%"></div>
+          </div>
+        </div>
+
+        <p class="note" id="storage-note" role="status" hidden></p>
+      </section>
+
+      <section class="panel" aria-labelledby="list-title">
+        <div class="panel__head">
+          <div>
+            <h2 id="list-title">Задачи</h2>
+            <p class="list-meta" id="list-meta" aria-live="polite">Показано: 3 из 3</p>
+          </div>
+
+          <div class="filters" role="group" aria-label="Фильтр задач">
+            <button class="filter" type="button" data-filter="all" aria-pressed="true">
+              Все
+            </button>
+            <button class="filter" type="button" data-filter="active" aria-pressed="false">
+              Активные
+            </button>
+            <button class="filter" type="button" data-filter="done" aria-pressed="false">
+              Готовые
+            </button>
+          </div>
+        </div>
+
+        <ul class="tasks" id="task-list"></ul>
+        <p class="empty" id="empty-state" hidden></p>
+      </section>
+
+      <section class="panel" aria-labelledby="form-title">
+        <h2 id="form-title">Новая задача</h2>
+
+        <form class="form" id="task-form" novalidate>
+          <div class="field">
+            <label for="title">Название</label>
+            <input
+              id="title"
+              name="title"
+              type="text"
+              autocomplete="off"
+              maxlength="120"
+              placeholder="Например, конспект лекции"
+              aria-describedby="title-error"
+            />
+            <p class="error" id="title-error" role="alert" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="hours">
+              Часы
+              <span class="hint">(0,5–24, шаг 0,5)</span>
+            </label>
+            <input
+              id="hours"
+              name="hours"
+              type="text"
+              inputmode="decimal"
+              autocomplete="off"
+              placeholder="Например, 1,5"
+              aria-describedby="hours-hint hours-error"
+            />
+            <p class="hint" id="hours-hint">Пустое поле не считается нулём.</p>
+            <p class="error" id="hours-error" role="alert" hidden></p>
+          </div>
+
+          <button class="primary" type="submit">Добавить задачу</button>
+        </form>
+      </section>
+
+      <footer class="app__footer">
+        <button class="link-button" id="reset-example" type="button">
+          Сбросить к исходному примеру
+        </button>
+      </footer>
+
+      <noscript>
+        <p class="note">
+          Для работы трекера нужен JavaScript. Включите его и перезагрузите
+          страницу.
+        </p>
+      </noscript>
+    </main>
+
+    <script type="module" src="app.mjs"></script>
+  </body>
+</html>
