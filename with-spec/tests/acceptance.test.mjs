@@ -101,6 +101,15 @@ test("часы: границы 0,5 и 24 допустимы", () => {
   assert.deepEqual(validateHours(HOURS_MAX), { ok: true, value: HOURS_MAX });
 });
 
+test("часы: запятая как десятичный разделитель принимается", () => {
+  assert.deepEqual(validateHours("0,5"), { ok: true, value: 0.5 });
+  assert.deepEqual(validateHours("3,5"), { ok: true, value: 3.5 });
+  assert.deepEqual(validateHours(" 3,5 "), { ok: true, value: 3.5 });
+  assert.deepEqual(validateHours("24,0"), { ok: true, value: 24 });
+  assert.equal(validateHours("3,7").ok, false);
+  assert.equal(validateHours("3,5,5").ok, false);
+});
+
 test("часы: 0,4 и 24,5 вне диапазона", () => {
   assert.equal(validateHours(0.4).ok, false);
   assert.equal(validateHours(24.5).ok, false);

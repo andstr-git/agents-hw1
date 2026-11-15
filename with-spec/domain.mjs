@@ -47,7 +47,7 @@ export function validateHours(rawHours) {
     if (trimmed === "") {
       return { ok: false, error: "Укажите часы" };
     }
-    value = Number(trimmed);
+    value = Number(trimmed.replace(",", "."));
   } else {
     return { ok: false, error: "Часы должны быть числом" };
   }
